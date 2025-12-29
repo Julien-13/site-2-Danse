@@ -1,0 +1,21 @@
+{
+  "name": "2'Danse Association",
+  "short_name": "2'Danse",
+  "description": "Application officielle de l'association 2'Danse à Port de Bouc",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#d4af37",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192/d4af37/ffffff?text=2D",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512/d4af37/ffffff?text=2Danse",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
