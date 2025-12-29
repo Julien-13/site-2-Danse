@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Association de Danse | 2'Danse</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+
+    <nav class="navbar">
+        <div class="logo">2'DANSE</div>
+        
+        <button id="auth-btn" class="login-nav-btn" onclick="handleAuthClick()">
+            <i class="fas fa-user"></i><span class="login-text"> Connexion</span>
+        </button>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-links" id="nav-list">
+            <li><a href="#" id="link-home" class="active" onclick="showPage('home')">Accueil</a></li>
+            <li><a href="#" id="link-cours" onclick="showPage('cours')">Cours</a></li>
+            <li><a href="#" id="link-spectacles" onclick="showPage('spectacles')">Spectacles</a></li>
+            <li><a href="#" id="link-contact" onclick="showPage('contact')">Contact / FAQ</a></li>
+            <li id="nav-privee" style="display: none;"><a href="#" id="link-privee" onclick="showPage('privee')">Espace Adhérents</a></li>
+        </ul>
+    </nav>
+
+    <div id="page-home">
+        <header class="hero">
+            <div class="hero-image">
+                <img src="img/logo.png" alt="Logo 2'Danse">
+            </div>
+            <div class="hero-text">
+                <h1>2'Danse</h1>
+                <p>Bienvenue chez 2'Danse. Notre association cultive la passion, la grandeur et l'expression corporelle depuis maintenant 3 ans à Port de Bouc.</p>
+                <div class="hero-btns">
+                    <a href="#" class="cta-button" onclick="showPage('spectacles')">Voir nos spectacles</a>
+                    <a href="#" class="cta-button secondary" onclick="showPage('contact')">Nous contacter</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="custom-shape-divider-top">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+
+        <section class="stats-section reveal">
+            <div class="stat-item"><span class="stat-number">2</span><span class="stat-label">Chorégraphes</span></div>
+            <div class="stat-item"><span class="stat-number">141</span><span class="stat-label">Adhérents</span></div>
+            <div class="stat-item"><span class="stat-number">+ 10</span><span class="stat-label">Spectacles</span></div>
+            <div class="stat-item"><span class="stat-number">3</span><span class="stat-label">Ans d'expérience</span></div>
+        </section>
+
+        <main class="gallery-section reveal">
+            <h2>Notre équipe</h2>
+            <div class="gallery-grid">
+                <div class="card"><div class="img-container"><img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=500&auto=format" alt="Maria"></div><p>Maria - Chorégraphe</p></div>
+                <div class="card"><div class="img-container"><img src="https://images.unsplash.com/photo-1547153760-18fc86324498?w=500&auto=format" alt="Yousra"></div><p>Yousra - Chorégraphe</p></div>
+                <div class="card"><div class="img-container"><img src="https://images.unsplash.com/photo-1535525153412-5a42439a210d?w=500&auto=format" alt="Assia"></div><p>Assia - Secrétaire</p></div>
+                <div class="card"><div class="img-container"><img src="https://images.unsplash.com/photo-1504609813442-a8924e83f737?w=500&auto=format" alt="Kiki"></div><p>Kiki - Membre actif</p></div>
+                <div class="card"><div class="img-container"><img src="https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?w=800&auto=format" alt="Franck"></div><p>Franck - Trésorier</p></div>
+            </div>
+        </main>
+
+        <section class="testimonials-section reveal">
+            <h2>Paroles de Parents</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"Une association familiale où ma fille s'épanouit chaque semaine. Les professeurs sont d'une bienveillance incroyable."</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="parent-name">- Julie M.</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"Le spectacle de fin d'année était tout simplement magique. On sent la passion et le travail derrière chaque chorégraphie."</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="parent-name">- Thomas L.</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"Merci à 2'Danse pour la rigueur et la joie apportées aux enfants. Mon fils adore ses cours de Cardio Danse !"</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="parent-name">- Sarah B.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="page-cours" style="display: none;">
+        <section class="header-banner">
+            <h1>Nos Groupes</h1>
+            <p>Saison 2025-2026</p>
+        </section>
+        <section class="groups-grid reveal">
+            <div class="group-card"><div class="group-icon"><i class="fas fa-child"></i></div><h3>Baby</h3><p>(4-6 ans)</p><span class="age-tag">Mercredi</span></div>
+            <div class="group-card"><div class="group-icon"><i class="fas fa-palette"></i></div><h3>Bambino</h3><p>(6-8 ans)</p><span class="age-tag">Mardi</span></div>
+            <div class="group-card"><div class="group-icon"><i class="fas fa-star"></i></div><h3>Benjamines</h3><p>(9-11 ans)</p><span class="age-tag">Mardi</span></div>
+            <div class="group-card"><div class="group-icon"><i class="fas fa-bolt"></i></div><h3>Junior</h3><p>(12 ans et +)</p><span class="age-tag">Mercredi - Jeudi - Vendredi</span></div>
+            <div class="group-card"><div class="group-icon"><i class="fas fa-heartbeat"></i></div><h3>Cardio Danse</h3><p>Fitness & Rythme</p><span class="age-tag">Mercredi</span></div>
+            <div class="group-card"><div class="group-icon"><i class="fas fa-user"></i></div><h3>Adultes</h3><p>Tous niveaux</p><span class="age-tag">Vendredi</span></div>
+        </section>
+    </div>
+
+    <div id="page-privee" style="display: none;">
+        <section class="header-banner">
+            <h1>Espace Adhérents</h1>
+            <p>Accès réservé aux membres</p>
+        </section>
+
+        <section class="docs-section reveal">
+            <h2>Documents utiles</h2>
+            <div class="docs-grid">
+                <div class="doc-card">
+                    <i class="fas fa-file-pdf"></i>
+                    <h4>Fiche d'inscription</h4>
+                    <p>Saison 2025-2026</p>
+                    <a href="#" class="download-btn">Télécharger</a>
+                </div>
+                <div class="doc-card">
+                    <i class="fas fa-file-pdf"></i>
+                    <h4>Règlement Intérieur</h4>
+                    <p>Lu et approuvé</p>
+                    <a href="#" class="download-btn">Télécharger</a>
+                </div>
+                <div class="doc-card">
+                    <i class="fas fa-file-pdf"></i>
+                    <h4>Calendrier Vacances</h4>
+                    <p>Dates des cours</p>
+                    <a href="#" class="download-btn">Télécharger</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="planning-section reveal">
+            <h2 class="section-title-centered">Planning Hebdomadaire</h2>
+            <div class="table-container">
+                <table class="planning-table">
+                    <thead>
+                        <tr>
+                            <th>Jour</th>
+                            <th>Groupe</th>
+                            <th>Horaire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="day-row-start">
+                            <td class="day-cell">Lundi</td>
+                            <td>2'United</td>
+                            <td>18:00 - 20:00</td>
+                        </tr>
+                        
+                        <tr class="day-row-start">
+                            <td class="day-cell" rowspan="3">Mardi</td>
+                            <td>Bambino</td>
+                            <td>17:30 - 18:30</td>
+                        </tr>
+                        <tr>
+                            <td>Benjamines débutantes</td>
+                            <td>18:30 - 19:30</td>
+                        </tr>
+                        <tr>
+                            <td>Benjamines avancées</td>
+                            <td>19:30 - 21:00</td>
+                        </tr>
+
+                        <tr class="day-row-start">
+                            <td class="day-cell" rowspan="3">Mercredi</td>
+                            <td>Baby</td>
+                            <td>17:00 - 18:00</td>
+                        </tr>
+                        <tr>
+                            <td>Junior avancées</td>
+                            <td>18:30 - 20:00</td>
+                        </tr>
+                        <tr>
+                            <td>Cardio Danse</td>
+                            <td>20:00 - 21:15</td>
+                        </tr>
+
+                        <tr class="day-row-start">
+                            <td class="day-cell">Jeudi</td>
+                            <td>Junior débutantes</td>
+                            <td>18:00 - 20:00</td>
+                        </tr>
+
+                        <tr class="day-row-start">
+                            <td class="day-cell" rowspan="2">Vendredi</td>
+                            <td>Junior Avancées</td>
+                            <td>18:00 - 20:00</td>
+                        </tr>
+                        <tr class="last-row">
+                            <td>Adultes</td>
+                            <td>20:00 - 21:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <div id="page-spectacles" style="display: none;">
+        <section class="header-banner">
+            <h1>Nos Spectacles</h1>
+            <p>Retrouvez nos moments forts sur scène</p>
+        </section>
+        <section class="video-gallery reveal">
+            <div class="video-item">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Gala" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Gala 2025 : "2'Direction"</h3>
+                    <p><i class="far fa-calendar-alt"></i> Mai 2025</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Noël" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Spectacle de noël : "2'Queen Snow"</h3>
+                    <p><i class="far fa-calendar-alt"></i> Décembre 2025</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="page-contact" style="display: none;">
+        <section class="header-banner"><h1>Contact & FAQ</h1></section>
+        <div class="contact-container reveal">
+            <section class="faq-section">
+                <h2>Questions Fréquentes</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">Comment s'inscrire ? <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content"><p>Les inscriptions se font lors du forum des associations en septembre ou directement lors des premiers cours.</p></div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Cours d'essai gratuit ? <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content"><p>Oui, la première séance est offerte pour permettre à l'enfant de tester le cours.</p></div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Quelle tenue porter ? <i class="fas fa-chevron-down"></i></div>
+                        <div class="accordion-content"><p>Une tenue de sport confortable (legging, t-shirt) et des baskets propres sont recommandées.</p></div>
+                    </div>
+                </div>
+            </section>
+            <section class="form-section">
+                <h2>Envoyez-nous un message</h2>
+                <form action="https://formspree.io/f/mdaogrlb" method="POST">
+                    <div class="form-group"><input type="text" name="nom" placeholder="Votre Nom" required></div>
+                    <div class="form-group"><input type="email" name="email" placeholder="Votre Email" required></div>
+                    <div class="form-group"><textarea name="message" placeholder="Votre message..." rows="4" required></textarea></div>
+                    <div style="font-size: 0.8rem; margin-bottom: 10px; color: #666;">
+                        * En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour vous répondre.
+                    </div>
+                    <button type="submit" class="cta-button">Envoyer</button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">2'DANSE</div>
+                <p>Association loi 1901<br>RNA : W134011016</p>
+                <p>Président : Alarcon Prévert Julien</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Siège social : 6 allée Ambroise Croizat<br>13110 Port de Bouc</p>
+                <p>Email : asso.2danse@hotmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>Suivez-nous</h4>
+                <div class="footer-socials">
+                    <a href="#"><i class="fab fa-snapchat"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 2'Danse. Tous droits réservés.</p>
+            <p><a href="#" onclick="toggleModal()">Mentions Légales & RGPD</a></p>
+        </div>
+    </footer>
+
+    <button id="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleLoginModal()">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem;">Connexion Adhérent</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Identifiant" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">Se connecter</button>
+                <p id="login-error" style="color: red; display: none; margin-top: 10px; text-align: center;">Identifiant ou mot de passe incorrect.</p>
+            </form>
+        </div>
+    </div>
+
+    <div id="legal-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleModal()">&times;</span>
+            <h2>Mentions Légales</h2>
+            <div class="modal-body">
+                <h3>Éditeur du site</h3>
+                <p><strong>Association 2'Danse</strong><br>
+                Siège social : 6 allée Ambroise Croizat, 13110 Port de Bouc<br>
+                RNA : W134011016<br>
+                Président : Alarcon Prévert Julien<br>
+                Email : asso.2danse@hotmail.com</p>
+
+                <h3>Hébergement</h3>
+                <p>Ce site est hébergé par : [Nom de l'hébergeur à compléter lors de la publication]<br>
+                Adresse : [Adresse de l'hébergeur]</p>
+
+                <h3>Protection des données (RGPD)</h3>
+                <p>Conformément au Règlement Général sur la Protection des Données (RGPD) :</p>
+                <ul>
+                    <li>Les données personnelles collectées via le formulaire de contact (nom, email) sont utilisées uniquement pour répondre à vos demandes d'information.</li>
+                    <li>Elles sont conservées pour une durée maximum de 1 an.</li>
+                    <li>Aucune donnée n'est partagée, vendue ou cédée à des tiers.</li>
+                    <li>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données en nous contactant par email.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
