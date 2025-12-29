@@ -51,7 +51,8 @@ function scrollToTop() {
 
 // Navigation
 function showPage(pageId) {
-    const pages = ['page-home', 'page-cours', 'page-spectacles', 'page-contact', 'page-privee'];
+    // AJOUT DE PAGE-PHOTOS DANS LA LISTE
+    const pages = ['page-home', 'page-cours', 'page-photos', 'page-spectacles', 'page-contact', 'page-privee'];
     pages.forEach(p => {
         const el = document.getElementById(p);
         if(el) el.style.display = 'none';
@@ -125,5 +126,4 @@ document.querySelectorAll('.accordion-header').forEach(h => {
     h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
 });
 
-// Initialisation
 handleScroll();

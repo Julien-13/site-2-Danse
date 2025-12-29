@@ -34,6 +34,7 @@
         <ul class="nav-links" id="nav-list">
             <li><a href="#" id="link-home" class="active" onclick="showPage('home')">Accueil</a></li>
             <li><a href="#" id="link-cours" onclick="showPage('cours')">Cours</a></li>
+            <li><a href="#" id="link-photos" onclick="showPage('photos')">Photos</a></li>
             <li><a href="#" id="link-spectacles" onclick="showPage('spectacles')">Spectacles</a></li>
             <li><a href="#" id="link-contact" onclick="showPage('contact')">Contact / FAQ</a></li>
             <li id="nav-privee" style="display: none;"><a href="#" id="link-privee" onclick="showPage('privee')">Espace Adhérents</a></li>
@@ -43,14 +44,14 @@
     <div id="page-home">
         <header class="hero">
             <div class="hero-image">
-                <img src="img/logo.png" alt="Logo 2'Danse">
+                <img src="img/logo.png" alt="Logo 2'Danse" onerror="this.src='https://via.placeholder.com/400x400/000000/ffffff?text=2%27Danse'">
             </div>
             <div class="hero-text">
                 <h1>2'Danse</h1>
                 <p>Bienvenue chez 2'Danse. Notre association cultive la passion, la grandeur et l'expression corporelle depuis maintenant 3 ans à Port de Bouc.</p>
                 <div class="hero-btns">
-                    <a href="#" class="cta-button" onclick="showPage('spectacles')">Voir nos spectacles</a>
-                    <a href="#" class="cta-button secondary" onclick="showPage('contact')">Nous contacter</a>
+                    <a href="#" class="cta-button" onclick="showPage('photos')">Voir nos photos</a>
+                    <a href="#" class="cta-button secondary" onclick="showPage('spectacles')">Voir nos spectacles</a>
                 </div>
             </div>
         </header>
@@ -116,6 +117,27 @@
             <div class="group-card"><div class="group-icon"><i class="fas fa-bolt"></i></div><h3>Junior</h3><p>(12 ans et +)</p><span class="age-tag">Mercredi - Jeudi - Vendredi</span></div>
             <div class="group-card"><div class="group-icon"><i class="fas fa-heartbeat"></i></div><h3>Cardio Danse</h3><p>Fitness & Rythme</p><span class="age-tag">Mercredi</span></div>
             <div class="group-card"><div class="group-icon"><i class="fas fa-user"></i></div><h3>Adultes</h3><p>Tous niveaux</p><span class="age-tag">Vendredi</span></div>
+        </section>
+    </div>
+
+    <div id="page-photos" style="display: none;">
+        <section class="header-banner">
+            <h1>Nos Souvenirs</h1>
+            <p>Retrouvez tous les moments forts de l'association 2'Danse</p>
+        </section>
+        <section class="photo-section reveal">
+            <div class="album-container">
+                <a href="https://photos.app.goo.gl/i4m9EEz2P52tZcjZ6" target="_blank" class="album-frame">
+                    <div class="frame-content">
+                        <img src="photo-evenement.jpg" alt="Album Photos" onerror="this.src='https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=1200'">
+                        <div class="frame-overlay">
+                            <i class="fas fa-camera-retro"></i>
+                            <h2>Album Complet</h2>
+                            <p>Cliquez pour voir toutes les photos</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </section>
     </div>
 
@@ -269,9 +291,9 @@
                     <div class="form-group"><input type="text" name="nom" placeholder="Votre Nom" required></div>
                     <div class="form-group"><input type="email" name="email" placeholder="Votre Email" required></div>
                     <div class="form-group"><textarea name="message" placeholder="Votre message..." rows="4" required></textarea></div>
-                    <div style="font-size: 0.8rem; margin-bottom: 10px; color: #666;">
-                        * En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour vous répondre.
-                    </div>
+                    <p class="gdpr-text" style="font-size: 0.75rem; color: #666; margin-bottom: 1rem;">
+                        Les données collectées via ce formulaire sont utilisées uniquement pour traiter votre demande, conservées 1 an maximum et ne sont pas cédées à des tiers.
+                    </p>
                     <button type="submit" class="cta-button">Envoyer</button>
                 </form>
             </section>
@@ -293,15 +315,13 @@
             <div class="footer-section">
                 <h4>Suivez-nous</h4>
                 <div class="footer-socials">
-                    <a href="#"><i class="fab fa-snapchat"></i></a>
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 2'Danse. Tous droits réservés.</p>
-            <p><a href="#" onclick="toggleModal()">Mentions Légales & RGPD</a></p>
+            <p>&copy; 2025 2'Danse. Tous droits réservés. | <a href="#" onclick="toggleModal()" style="color:white;">Mentions Légales & RGPD</a></p>
         </div>
     </footer>
 
@@ -314,12 +334,8 @@
             <span class="close-modal" onclick="toggleLoginModal()">&times;</span>
             <h2 style="text-align: center; margin-bottom: 2rem;">Connexion Adhérent</h2>
             <form id="login-form">
-                <div class="form-group">
-                    <input type="text" id="username" placeholder="Identifiant" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="password" placeholder="Mot de passe" required>
-                </div>
+                <div class="form-group"><input type="text" id="username" placeholder="Identifiant" required></div>
+                <div class="form-group"><input type="password" id="password" placeholder="Mot de passe" required></div>
                 <button type="submit" class="cta-button" style="width: 100%;">Se connecter</button>
                 <p id="login-error" style="color: red; display: none; margin-top: 10px; text-align: center;">Identifiant ou mot de passe incorrect.</p>
             </form>
@@ -331,25 +347,11 @@
             <span class="close-modal" onclick="toggleModal()">&times;</span>
             <h2>Mentions Légales</h2>
             <div class="modal-body">
-                <h3>Éditeur du site</h3>
-                <p><strong>Association 2'Danse</strong><br>
-                Siège social : 6 allée Ambroise Croizat, 13110 Port de Bouc<br>
-                RNA : W134011016<br>
-                Président : Alarcon Prévert Julien<br>
-                Email : asso.2danse@hotmail.com</p>
-
+                <p><strong>Association 2'Danse</strong><br>RNA : W134011016<br>Président : Alarcon Prévert Julien<br>Siège social : 6 allée Ambroise Croizat, 13110 Port de Bouc</p>
                 <h3>Hébergement</h3>
-                <p>Ce site est hébergé par : [Nom de l'hébergeur à compléter lors de la publication]<br>
-                Adresse : [Adresse de l'hébergeur]</p>
-
-                <h3>Protection des données (RGPD)</h3>
-                <p>Conformément au Règlement Général sur la Protection des Données (RGPD) :</p>
-                <ul>
-                    <li>Les données personnelles collectées via le formulaire de contact (nom, email) sont utilisées uniquement pour répondre à vos demandes d'information.</li>
-                    <li>Elles sont conservées pour une durée maximum de 1 an.</li>
-                    <li>Aucune donnée n'est partagée, vendue ou cédée à des tiers.</li>
-                    <li>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données en nous contactant par email.</li>
-                </ul>
+                <p>Ce site sera hébergé une fois publié par : [Indiquez ici le nom et l'adresse de votre hébergeur].</p>
+                <h3>RGPD</h3>
+                <p>Les données personnelles collectées via le formulaire de contact sont utilisées uniquement pour répondre à vos demandes. Elles sont conservées pendant 1 an maximum et ne sont jamais partagées avec des tiers.</p>
             </div>
         </div>
     </div>
@@ -361,6 +363,6 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
-</script>
+    </script>
 </body>
 </html>

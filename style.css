@@ -175,3 +175,84 @@ body { font-family: 'Poppins', sans-serif; background: var(--white); color: var(
 
 @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
 @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+/* TOUT VOTRE CODE PRÉCÉDENT RESTE ICI ... */
+
+/* --- AJOUT : STYLE DU CADRE PHOTO UNIQUE --- */
+.album-container {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 5%;
+}
+
+.album-frame {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    border: 15px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.4s ease;
+}
+
+.album-frame:hover {
+    transform: scale(1.02) rotate(1deg);
+}
+
+.frame-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.frame-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.frame-overlay i { font-size: 3rem; margin-bottom: 1rem; color: var(--accent); }
+.frame-overlay h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+.frame-overlay p { font-style: italic; opacity: 0.9; }
+
+.album-frame:hover .frame-content img {
+    transform: scale(1.1);
+}
+
+/* RESPONSIVE CADRE */
+@media (max-width: 768px) {
+    .album-frame { height: 300px; }
+    .frame-overlay h2 { font-size: 1.5rem; }
+}
+
+/* --- TOAST NOTIFICATION --- */
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: var(--dark);
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 5000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    border-bottom: 3px solid var(--accent);
+}
+
+.toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+@keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+@keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
