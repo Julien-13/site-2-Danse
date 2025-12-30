@@ -1,8 +1,14 @@
-const CREDENTIALS = { username: "2danse", password: "0523" };
+// CONFIGURATION DES ACCÈS
+const ADMIN_CREDENTIALS = { username: "kiki", password: "Jul13110" };
+const USER_CREDENTIALS = { username: "2danse", password: "0523" };
 
 // CONFIGURATION SUPABASE
 const SUPABASE_URL = "https://fdjgleaayjnodnucipyb.supabase.co";
 const SUPABASE_KEY = "sb_publishable_p9Xo3hdIvsgOruZUr6MaLw_GdzrM3J-";
+
+// Variables d'état
+let isLoggedIn = false;
+let isAdmin = false;
 
 // Menu Burger
 const mobileMenu = document.querySelector('#mobile-menu');
@@ -37,7 +43,7 @@ window.addEventListener("scroll", handleScroll);
 
 function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
 
-// Navigation
+// NAVIGATION
 function showPage(pageId) {
     const pages = ['page-home', 'page-cours', 'page-photos', 'page-spectacles', 'page-contact', 'page-privee', 'page-livredor'];
     pages.forEach(p => {
@@ -52,43 +58,61 @@ function showPage(pageId) {
     const link = document.getElementById('link-' + pageId);
     if(link) link.classList.add('active');
 
-    if (navLinks) {
+    if (navLinks && navLinks.classList.contains('active')) {
         navLinks.classList.remove('active');
         mobileMenu.classList.remove('open');
     }
+
     window.scrollTo(0, 0);
     if(pageId === 'livredor') fetchMessages();
     setTimeout(handleScroll, 100);
 }
 
-// Authentification
-let isLoggedIn = false;
-function handleAuthClick() { isLoggedIn ? logout() : toggleLoginModal(); }
-
+// AUTHENTIFICATION DOUBLE NIVEAU
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const user = document.getElementById('username').value;
         const pass = document.getElementById('password').value;
-        if (user === CREDENTIALS.username && pass === CREDENTIALS.password) {
+
+        // Vérification ADMIN (Kiki)
+        if (user === ADMIN_CREDENTIALS.username && pass === ADMIN_CREDENTIALS.password) {
             isLoggedIn = true;
-            document.getElementById('nav-privee').style.display = 'block';
-            document.getElementById('auth-btn').innerHTML = '<i class="fas fa-sign-out-alt"></i><span class="login-text"> Déconnexion</span>';
-            toggleLoginModal();
-            showPage('privee');
-            showToast("Vous êtes bien connectés");
-        } else {
+            isAdmin = true; // Active les poubelles
+            loginSuccess("Bienvenue Kiki (Admin)");
+        } 
+        // Vérification ADHÉRENT (2danse)
+        else if (user === USER_CREDENTIALS.username && pass === USER_CREDENTIALS.password) {
+            isLoggedIn = true;
+            isAdmin = false; // Pas de poubelles
+            loginSuccess("Espace Adhérents ouvert");
+        } 
+        else {
             document.getElementById('login-error').style.display = 'block';
         }
     });
 }
 
+function loginSuccess(msg) {
+    document.getElementById('nav-privee').style.display = 'block';
+    document.getElementById('auth-btn').innerHTML = '<i class="fas fa-sign-out-alt"></i><span class="login-text"> Déconnexion</span>';
+    toggleLoginModal();
+    showPage('privee');
+    showToast(msg);
+}
+
+function handleAuthClick() {
+    isLoggedIn ? logout() : toggleLoginModal();
+}
+
 function logout() {
     isLoggedIn = false;
+    isAdmin = false;
     document.getElementById('nav-privee').style.display = 'none';
     document.getElementById('auth-btn').innerHTML = '<i class="fas fa-user"></i><span class="login-text"> Connexion</span>';
     showPage('home');
+    showToast("Déconnexion réussie");
 }
 
 function showToast(message) {
@@ -104,25 +128,27 @@ function toggleModal() {
     const m = document.getElementById('legal-modal');
     if(m) m.style.display = (m.style.display === "block") ? "none" : "block";
 }
+
 function toggleLoginModal() {
     const m = document.getElementById('login-modal');
-    if(m) m.style.display = (m.style.display === "block") ? "none" : "block";
+    if(m) {
+        m.style.display = (m.style.display === "block") ? "none" : "block";
+        document.getElementById('login-error').style.display = 'none';
+    }
 }
 
-document.querySelectorAll('.accordion-header').forEach(h => {
-    h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
-});
-
-// LOGIQUE COMPTE À REBOURS
+// COMPTE À REBOURS
 function updateCountdown() {
     const galaDate = new Date("May 17, 2026 20:00:00").getTime();
     const now = new Date().getTime();
     const gap = galaDate - now;
+
     if (gap > 0) {
         const d = Math.floor(gap / (1000 * 60 * 60 * 24));
         const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((gap % (1000 * 60)) / 1000);
+
         document.getElementById("days").innerText = d < 10 ? "0" + d : d;
         document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
         document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
@@ -131,9 +157,13 @@ function updateCountdown() {
 }
 setInterval(updateCountdown, 1000);
 
-// --- LOGIQUE LIVRE D'OR (SUPABASE) ---
+// FAQ
+document.querySelectorAll('.accordion-header').forEach(h => {
+    h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
+});
 
-// 1. Lire les messages
+// --- LIVRE D'OR (SUPABASE) ---
+
 async function fetchMessages() {
     const container = document.getElementById('guestbook-messages');
     try {
@@ -143,19 +173,18 @@ async function fetchMessages() {
         const messages = await response.json();
         
         container.innerHTML = messages.map(msg => `
-            <div class="message-card reveal active">
-                ${isLoggedIn ? `<button class="delete-btn" onclick="deleteMessage(${msg.id})"><i class="fas fa-trash"></i></button>` : ''}
+            <div class="message-card">
+                ${isAdmin ? `<button class="delete-btn" onclick="deleteMessage(${msg.id})"><i class="fas fa-trash"></i></button>` : ''}
                 <p>"${msg.message}"</p>
                 <span class="message-author">${msg.name}</span>
-                <span class="message-date">${new Date(msg.created_at).toLocaleDateString()}</span>
+                <span class="message-date">${new Date(msg.created_at).toLocaleDateString('fr-FR')}</span>
             </div>
-        `).join('') || '<p>Soyez le premier à laisser un message !</p>';
+        `).join('') || '<p style="text-align:center;">Soyez le premier à laisser un message !</p>';
     } catch (err) {
         container.innerHTML = "<p>Erreur lors du chargement des messages.</p>";
     }
 }
 
-// 2. Envoyer un message
 const gbForm = document.getElementById('guestbook-form');
 if(gbForm) {
     gbForm.addEventListener('submit', async (e) => {
@@ -186,18 +215,19 @@ if(gbForm) {
     });
 }
 
-// 3. Supprimer un message (Méthode a posteriori - Réservé au président/admin connecté)
 async function deleteMessage(id) {
-    if(!confirm("Supprimer ce message ?")) return;
+    if(!isAdmin || !confirm("Supprimer ce message ?")) return;
     try {
-        await fetch(`${SUPABASE_URL}/rest/v1/guestbook?id=eq.${id}`, {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/guestbook?id=eq.${id}`, {
             method: 'DELETE',
             headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
         });
-        showToast("Message supprimé");
-        fetchMessages();
+        if(response.ok) {
+            showToast("Message supprimé.");
+            fetchMessages();
+        }
     } catch (err) {
-        showToast("Erreur de suppression");
+        showToast("Erreur de suppression.");
     }
 }
 
