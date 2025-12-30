@@ -13,6 +13,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="icon-192.png">
+    <style>
+        /* Ajout spécifique pour l'affichage 2x2 des vidéos */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            .video-gallery {
+                grid-template-columns: 1fr; /* 1 colonne sur mobile pour la lisibilité */
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -246,7 +260,7 @@
         <section class="video-gallery reveal">
             <div class="video-item">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Gala" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Gala 2025" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
                     <h3>Gala 2025 : "2'Direction"</h3>
@@ -264,11 +278,38 @@
             </div>
             <div class="video-item">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/pQkDiVEvpCc" title="Texas" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Spectacle 3" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3>Texas Danse</h3>
-                    <p><i class="far fa-calendar-alt"></i> Décembre 2025</p>
+                    <h3>Spectacle Hiver</h3>
+                    <p><i class="far fa-calendar-alt"></i> Février 2025</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/pQkDiVEvpCc" title="Spectacle 4" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Compétition Régionale</h3>
+                    <p><i class="far fa-calendar-alt"></i> Avril 2025</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Spectacle 5" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Show de Fin d'Année</h3>
+                    <p><i class="far fa-calendar-alt"></i> Juin 2025</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/pQkDiVEvpCc" title="Spectacle 6" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Sortie Extérieure</h3>
+                    <p><i class="far fa-calendar-alt"></i> Juillet 2025</p>
                 </div>
             </div>
         </section>
