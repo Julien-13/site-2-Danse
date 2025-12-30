@@ -1,4 +1,4 @@
-const CREDENTIALS = { username: "admin", password: "1234" };
+const CREDENTIALS = { username: "2danse", password: "0523" };
 
 // Menu Burger
 const mobileMenu = document.querySelector('#mobile-menu');
