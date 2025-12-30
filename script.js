@@ -51,7 +51,6 @@ function scrollToTop() {
 
 // Navigation
 function showPage(pageId) {
-    // AJOUT DE PAGE-PHOTOS DANS LA LISTE
     const pages = ['page-home', 'page-cours', 'page-photos', 'page-spectacles', 'page-contact', 'page-privee'];
     pages.forEach(p => {
         const el = document.getElementById(p);
@@ -126,4 +125,25 @@ document.querySelectorAll('.accordion-header').forEach(h => {
     h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
 });
 
+// AJOUT : LOGIQUE DU COMPTE À REBOURS
+function updateCountdown() {
+    const galaDate = new Date("May 17, 2026 20:00:00").getTime();
+    const now = new Date().getTime();
+    const gap = galaDate - now;
+
+    if (gap > 0) {
+        const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+        const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((gap % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+        document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+        document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+        document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+    }
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
 handleScroll();
