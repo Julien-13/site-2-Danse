@@ -231,5 +231,14 @@ async function deleteMessage(id) {
     }
 }
 
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    // On ajoute/enlève la classe active sur le bouton ET sur le menu
+    menuToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+});
+
 updateCountdown();
 handleScroll();
