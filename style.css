@@ -56,6 +56,23 @@ body {
     flex: 1;
 }
 
+/* Le bouton Hamburger (caché par défaut sur PC) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: var(--accent);
+    transition: 0.3s;
+}
+
 .nav-links {
     display: flex;
     list-style: none;
@@ -429,17 +446,17 @@ body {
     font-weight: 600;
 }
 
-/* --- ALBUM PHOTOS --- */
+/* --- ALBUM PHOTOS (MODIFIÉ) --- */
 .photo-section {
     padding: 4rem 10%;
 }
 
 .album-frame {
     display: block;
-    max-width: 900px;
+    max-width: 600px;
     margin: 0 auto;
     text-decoration: none;
-    border: 15px solid var(--white);
+    border: 12px solid var(--white);
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
@@ -481,19 +498,20 @@ body {
     color: var(--accent);
 }
 
-/* --- VIDEOS --- */
+/* --- VIDEOS SPECTACLES (MODIFIÉ) --- */
 .video-gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    padding: 4rem 5%;
+    gap: 80px;
+    padding: 4rem 15%;
 }
 
 .video-item {
     background: var(--white);
-    border: 10px solid var(--dark);
-    padding: 20px;
-    box-shadow: 15px 15px 0 var(--accent);
+    border: 8px solid var(--dark);
+    padding: 15px;
+    box-shadow: 12px 12px 0 var(--accent);
+    max-width: 100%;
 }
 
 .video-wrapper {
@@ -512,7 +530,6 @@ body {
 }
 
 /* --- ESPACE ADHÉRENTS (DOCS & PLANNING) --- */
-
 .docs-section {
     padding: 4rem 10%;
     background: var(--light-beige);
@@ -878,16 +895,22 @@ body {
     transform: scale(1.1);
 }
 
-/* --- MEDIA QUERIES --- */
+/* --- MEDIA QUERIES (MOBILE FIX) --- */
 @media (max-width: 992px) {
     .contact-container { grid-template-columns: 1fr; }
     .hero-text h1 { font-size: 2.8rem; }
+    .video-gallery { padding: 4rem 5%; gap: 40px; }
 }
 
 @media (max-width: 768px) {
-    .menu-toggle { display: flex; flex-direction: column; cursor: pointer; }
+    /* Faire apparaitre le bouton hamburger */
+    .menu-toggle { 
+        display: flex; 
+    }
+
+    /* Adapter les liens pour le menu mobile */
     .nav-links {
-        display: none;
+        display: none; /* Caché par défaut */
         flex-direction: column;
         position: absolute;
         top: 80px;
@@ -895,13 +918,40 @@ body {
         width: 100%;
         background: var(--dark);
         padding: 3rem 0;
+        z-index: 1000;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.3);
     }
-    .nav-links.active { display: flex; }
-    .nav-links li { margin: 1.5rem 0; }
-    .hero { flex-direction: column; text-align: center; padding-top: 3rem; }
+
+    /* Quand on clique sur le burger, JS ajoute la classe .active */
+    .nav-links.active { 
+        display: flex; 
+    }
+
+    .nav-links li { 
+        margin: 1.5rem 0; 
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        font-size: 1rem;
+    }
+
+    /* Le bouton de connexion dans le menu mobile */
+    .login-nav-btn {
+        margin: 0 auto;
+        width: fit-content;
+    }
+
+    /* Autres ajustements mobile */
+    .hero { flex-direction: column; text-align: center; padding: 3rem 5%; }
+    .hero-image img { max-width: 300px; }
     .hero-btns { justify-content: center; }
-    .video-gallery { grid-template-columns: 1fr; }
+    .video-gallery { grid-template-columns: 1fr; padding: 4rem 5%; }
     .gallery-grid { grid-template-columns: 1fr; }
     .gallery-grid .card { grid-column: span 1 !important; }
     .planning-section, .docs-section { padding: 3rem 5%; }
+    
+    .header-banner h1 { font-size: 2.2rem; }
+    .stat-number { font-size: 2.5rem; }
 }
