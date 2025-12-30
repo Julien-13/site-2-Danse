@@ -21,9 +21,61 @@
             gap: 20px;
             padding: 20px;
         }
+
+        /* --- STYLE DU QUIZ SECRET --- */
+        #quiz-modal .modal-content {
+            max-width: 500px;
+            text-align: center;
+            background: #fff;
+            border: 3px solid #d4af37;
+        }
+
+        .quiz-header h2 { 
+            color: #d4af37; 
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            border-color: #d4af37;
+            background: #fffaf0;
+            transform: translateY(-2px);
+        }
+
+        .score-final {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #d4af37;
+            margin: 15px 0;
+        }
+
         @media (max-width: 768px) {
             .video-gallery {
-                grid-template-columns: 1fr; /* 1 colonne sur mobile pour la lisibilité */
+                grid-template-columns: 1fr; /* 1 colonne sur mobile */
             }
         }
     </style>
@@ -33,7 +85,7 @@
     <div id="progress-bar"></div>
 
     <nav class="navbar">
-        <div class="logo">2'DANSE</div>
+        <div class="logo" id="logo-secret" style="cursor: pointer; user-select: none;">2'DANSE</div>
         
         <button id="auth-btn" class="login-nav-btn" onclick="handleAuthClick()">
             <i class="fas fa-user"></i><span class="login-text"> Connexion</span>
@@ -202,7 +254,6 @@
                             <td>2'United</td>
                             <td>18:00 - 20:00</td>
                         </tr>
-                        
                         <tr class="day-row-start">
                             <td class="day-cell" rowspan="3">Mardi</td>
                             <td>Bambino</td>
@@ -216,7 +267,6 @@
                             <td>Benjamines avancées</td>
                             <td>19:30 - 21:00</td>
                         </tr>
-
                         <tr class="day-row-start">
                             <td class="day-cell" rowspan="3">Mercredi</td>
                             <td>Baby</td>
@@ -230,13 +280,11 @@
                             <td>Cardio Danse</td>
                             <td>20:00 - 21:15</td>
                         </tr>
-
                         <tr class="day-row-start">
                             <td class="day-cell">Jeudi</td>
                             <td>Junior débutantes</td>
                             <td>18:00 - 20:00</td>
                         </tr>
-
                         <tr class="day-row-start">
                             <td class="day-cell" rowspan="2">Vendredi</td>
                             <td>Junior Avancées</td>
@@ -308,7 +356,7 @@
                     <iframe src="https://www.youtube.com/embed/pQkDiVEvpCc" title="Spectacle 6" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="video-info">
-                    <h3>Sortie Extérieure</h3>
+                    <h3>Sortie Été</h3>
                     <p><i class="far fa-calendar-alt"></i> Juillet 2025</p>
                 </div>
             </div>
@@ -376,6 +424,38 @@
         </div>
     </footer>
 
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeQuiz()">&times;</span>
+            
+            <div id="quiz-intro">
+                <div class="quiz-header">
+                    <h2>🌟 Code Secret Trouvé !</h2>
+                </div>
+                <p>Félicitations petit détective ! Tu as découvert le jeu caché de 2'Danse. Es-tu prêt pour le Quiz ?</p>
+                <button class="cta-button" onclick="startQuiz()" style="margin-top: 20px;">C'est parti !</button>
+            </div>
+
+            <div id="quiz-game" style="display: none;">
+                <div class="quiz-header">
+                    <h3 id="quiz-progress" style="color: #d4af37; margin-bottom: 10px;">Question 1/5</h3>
+                </div>
+                <div class="question-text" id="question-text">Chargement de la question...</div>
+                <div class="options-grid" id="options-container"></div>
+            </div>
+
+            <div id="quiz-result" style="display: none;">
+                <div class="quiz-header">
+                    <h2>Fin du Quiz !</h2>
+                </div>
+                <p>Ton score est de :</p>
+                <div class="score-final"><span id="final-score">0</span> / 5</div>
+                <p id="result-comment" style="margin-bottom: 20px; font-weight: 600;"></p>
+                <button class="cta-button" onclick="closeQuiz()">Retour au site</button>
+            </div>
+        </div>
+    </div>
+
     <button id="back-to-top" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
     </button>
@@ -409,6 +489,98 @@
 
     <script src="script.js"></script>
     <script>
+        /* --- SYSTÈME DE DÉTECTION 5 CLICS --- */
+        let clickCount = 0;
+        let clickTimer;
+        const logo = document.getElementById('logo-secret');
+
+        logo.addEventListener('click', () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            
+            if (clickCount === 5) {
+                document.getElementById('quiz-modal').style.display = 'block';
+                clickCount = 0;
+            }
+
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 2000); // Reset si plus de 2 secondes entre les clics
+        });
+
+        /* --- LOGIQUE DU QUIZ --- */
+        const quizData = [
+            { q: "Où se trouvent les cours de 2'Danse ?", a: ["Marseille", "Port de Bouc", "Martigues"], correct: 1 },
+            { q: "En quelle année l'association a-t-elle ouvert ?", a: ["Il y a 1 an", "Il y a 3 ans", "Il y a 10 ans"], correct: 1 },
+            { q: "Qui sont les deux chorégraphes de l'école ?", a: ["Maria et Assia", "Maria et Yousra", "Yousra et Kiki"], correct: 1 },
+            { q: "Comment s'appelle le groupe des 4-6 ans ?", a: ["Bambino", "Junior", "Baby"], correct: 2 },
+            { q: "Quel est le nom du Gala 2025 ?", a: ["2'Direction", "2'United", "2'Queen"], correct: 0 }
+        ];
+
+        let currentQuestionIdx = 0;
+        let quizScore = 0;
+
+        function startQuiz() {
+            document.getElementById('quiz-intro').style.display = 'none';
+            document.getElementById('quiz-game').style.display = 'block';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const currentQ = quizData[currentQuestionIdx];
+            document.getElementById('quiz-progress').innerText = `Question ${currentQuestionIdx + 1} / ${quizData.length}`;
+            document.getElementById('question-text').innerText = currentQ.q;
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            currentQ.a.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = option;
+                btn.onclick = () => selectOption(index);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(index) {
+            if (index === quizData[currentQuestionIdx].correct) {
+                quizScore++;
+            }
+            
+            currentQuestionIdx++;
+            if (currentQuestionIdx < quizData.length) {
+                loadQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-game').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'block';
+            document.getElementById('final-score').innerText = quizScore;
+            
+            let msg = "";
+            if (quizScore === 5) msg = "Incroyable ! Tu es une légende de 2'Danse ! 👑";
+            else if (quizScore >= 3) msg = "Bravo ! Tu connais super bien ton association ! ✨";
+            else msg = "Pas mal ! Continue de danser avec nous ! 💪";
+            document.getElementById('result-comment').innerText = msg;
+        }
+
+        function closeQuiz() {
+            document.getElementById('quiz-modal').style.display = 'none';
+            // Reset pour la prochaine fois
+            setTimeout(() => {
+                document.getElementById('quiz-intro').style.display = 'block';
+                document.getElementById('quiz-game').style.display = 'none';
+                document.getElementById('quiz-result').style.display = 'none';
+                currentQuestionIdx = 0;
+                quizScore = 0;
+            }, 500);
+        }
+
+        /* Service Worker */
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
